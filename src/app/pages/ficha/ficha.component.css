@@ -1,0 +1,20 @@
+.btn-round {
+  border-radius: 50% !important;
+}
+
+.half-round-right {
+  border-radius: 0 25px 25px 0 !important;
+  width: 150px;
+  text-align: left;
+}
+
+.half-round-left {
+  border-radius: 25px 0 0 25px !important;
+}
+
+.pmd-floating-action {
+  bottom: 1rem;
+  position: fixed;
+  right: 1rem;
+  z-index: 1000;
+}
