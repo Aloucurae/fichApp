@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.pmd-floating-action {
+    bottom: 1rem;
+    position: fixed;
+    right: 1rem;
+    z-index: 1000;
+  }

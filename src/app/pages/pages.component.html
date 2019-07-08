@@ -1,1 +1,17 @@
-<p>pages works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 fucha" *ngFor="let v of vagas">
+            <app-ficha></app-ficha>
+        </div>
+    </div>
+
+
+    <div class="pmd-floating-action" role="navigation">
+        <button class="btn btn-outline-success" (click)="addVaga()">
+            <i class="fa fa-plus"></i>
+        </button>
+        <button class="btn btn-outline-danger">
+            <i class="fa fa-minus"></i>
+        </button>
+    </div>
+</div>

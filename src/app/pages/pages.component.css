@@ -1,0 +1,8 @@
+.fucha {
+    /* border: 1px solid #000; */
+    height: 100vh;
+    overflow-x: hidden;
+    padding: 0;
+    float: left;
+    border-right: 1px solid #777;
+}
