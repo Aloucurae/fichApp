@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForOf } from '@angular/common';
+import { Socket, SocketIoConfig } from 'ng-socket-io';
 
 @Component({
   selector: 'app-pages',
@@ -8,13 +8,13 @@ import { NgForOf } from '@angular/common';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private socket: Socket) { }
 
   vagas = [];
 
   ngOnInit() {
 
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < 1; index++) {
       this.addVaga();
     }
   }
@@ -25,6 +25,12 @@ export class PagesComponent implements OnInit {
 
   remVaga() {
 
+  }
+
+  joinChat() {
+
+    this.socket.connect();
+    // this.socket.emit('set-nickname', this.nickname);
   }
 
 }

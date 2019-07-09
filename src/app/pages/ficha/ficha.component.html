@@ -1,114 +1,140 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Machado de assis</a>
+<nav class="navbar navbar-dark bg-dark text-white">
+  <a class="navbar-brand">{{perc.nome}} | {{perc.pont}}</a>
 </nav>
 <div class="container">
-    <br>
-    <form>
+  <br>
+  <form>
 
-        <div class="form-group ">
-            <div class="input-group">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary half-round-right" type="button">
+    <div class="form-group ">
+      <div class="input-group">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary half-round-right" type="button">
             <b>F</b>orça
           </button>
-                </div>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-danger btn-round" type="button">
+        </div>
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="remAttrs('forc')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
-                    <button class="btn btn-outline-success btn-round" type="button">
+          <button (click)="addAttrs('forc')" class="btn btn-outline-success btn-round" type="button">
             <i class="fa fa-plus"></i>
           </button>
-                </div>
-                <input type="text" class="form-control half-round-left" placeholder="00" size="4" maxlength="4">
-            </div>
         </div>
+        <input type="number" [(ngModel)]="perc.forc" name="forc" id="forc" class="form-control half-round-left"
+          placeholder="0" disabled="disabled" size="4" maxlength="4">
+      </div>
+    </div>
 
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary half-round-right" type="button">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary half-round-right" type="button">
             <b>H</b>abilidade
           </button>
-                </div>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-danger btn-round" type="button">
+        </div>
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="remAttrs('habi')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
-                    <button class="btn btn-outline-success btn-round" type="button">
+          <button (click)="addAttrs('habi')" class="btn btn-outline-success btn-round" type="button">
             <i class="fa fa-plus"></i>
           </button>
-                </div>
-                <input type="text" class="form-control half-round-left" placeholder="00" size="4" maxlength="4">
-            </div>
         </div>
+        <input type="number" [(ngModel)]="perc.habi" name="habi" id="habi" class="form-control half-round-left"
+          placeholder="0" disabled="disabled" size="4" maxlength="4">
+      </div>
+    </div>
 
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary half-round-right" type="button">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary half-round-right" type="button">
             <b>R</b>esistência
           </button>
-                </div>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-danger btn-round" type="button">
+        </div>
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="remAttrs('resi')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
-                    <button class="btn btn-outline-success btn-round" type="button">
+          <button (click)="addAttrs('resi')" class="btn btn-outline-success btn-round" type="button">
             <i class="fa fa-plus"></i>
           </button>
-                </div>
-                <input type="text" class="form-control half-round-left" placeholder="00" size="4" maxlength="4">
-            </div>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary half-round-right" type="button">
+        <input type="number" [(ngModel)]="perc.resi" name="resi" id="resi" class="form-control half-round-left"
+          placeholder="0" disabled="disabled" size="4" maxlength="4">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary half-round-right" type="button">
             <b>A</b>rmadura
           </button>
-                </div>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-danger btn-round" type="button">
+        </div>
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="remAttrs('armd')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
-                    <button class="btn btn-outline-success btn-round" type="button">
+          <button (click)="addAttrs('armd')" class="btn btn-outline-success btn-round" type="button">
             <i class="fa fa-plus"></i>
           </button>
-                </div>
-                <input type="text" class="form-control half-round-left" placeholder="00" size="4" maxlength="4">
-            </div>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary half-round-right" type="button">
+        <input type="number" [(ngModel)]="perc.armd" name="armd" id="armd" class="form-control half-round-left"
+          placeholder="0" disabled="disabled" size="4" maxlength="4">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary half-round-right" type="button">
             <b>P</b>oder <b>d</b>e <b>F</b>ogo
           </button>
-                </div>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-danger btn-round" type="button">
+        </div>
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="remAttrs('podf')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
-                    <button class="btn btn-outline-success btn-round" type="button">
+          <button (click)="addAttrs('podf')" class="btn btn-outline-success btn-round" type="button">
             <i class="fa fa-plus"></i>
           </button>
-                </div>
-                <input type="text" class="form-control half-round-left" placeholder="00" size="4" maxlength="4">
-            </div>
         </div>
+        <input type="number" [(ngModel)]="perc.podf" name="podf" id="podf" class="form-control half-round-left"
+          placeholder="0" disabled="disabled" size="4" maxlength="4">
+      </div>
+    </div>
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Historia</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+    <hr>
+    <fieldset>
+      <legend>Desvantagens</legend>
+      <div class="row col-12" *ngFor="let d of perc.dvan;">
+        <div class="col-8 border half-round-right">{{ d.desc }}</div>
+        <div class="col-4 border ">{{ d.value }}</div>
+      </div>
+    </fieldset>
+    <hr>
 
+    <fieldset>
+      <legend>Vantagens</legend>
+      <div class="row col-12" *ngFor="let d of perc.vant;">
+        <div class="col-8 border half-round-right">{{ d.desc }}</div>
+        <div class="col-4 border ">{{ d.value }}</div>
+      </div>
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Historia</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+    </fieldset>
+    <hr>
 
-    </form>
+    <div class="form-group">
+      <label for="hist">Historia</label>
+      <div class="border col-12">
+        <small>
+          {{perc.hist}}
+        </small>
+      </div>
+    </div>
+  </form>
+
+  <button type="button" class="btn btn-success col-12" (click)="salvaPersonagem()">
+    Salvar
+  </button>
 
 </div>
