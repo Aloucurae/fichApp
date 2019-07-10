@@ -8,7 +8,6 @@ var port = process.env.PORT || 3000;
 
 ip = '';
 
-
 function ip_local() {
 
   var os = require('os');
@@ -44,63 +43,79 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Chatroom
 
 var numUsers = 0;
+var users = [];
+var sockets = [];
 
 io.on('connection', (socket) => {
+
+  console.log('nova conexao');
 
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data) => {
+  socket.on('message', (data) => {
     // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
-      username: socket.username,
+    socket.broadcast.emit('message', {
+      name: socket.name,
       message: data
     });
   });
 
-  // when the client emits 'add user', this listens and executes
-  socket.on('add user', (username) => {
+  // when the client emits 'adduser', this listens and executes
+  socket.on('adduser', (perc) => {
 
     if (addedUser) return;
 
-    // we store the username in the socket session for this client
-    socket.username = username;
+    users[perc.id] = socket;
+    sockets[socket.id] = perc.id;
+
+    // we store the name in the socket session for this client
+    socket.nome = perc['nome'];
+
     ++numUsers;
+
     addedUser = true;
+
     socket.emit('login', {
-      numUsers: numUsers
+      numUsers: users.length
     });
+
     // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
+    socket.broadcast.emit('userjoined', {
+      nome: socket.nome,
+      numUsers: numUsers,
+      perc: perc
     });
+
   });
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', () => {
     socket.broadcast.emit('typing', {
-      username: socket.username
+      name: socket.name
     });
   });
 
   // when the client emits 'stop typing', we broadcast it to others
   socket.on('stop typing', () => {
     socket.broadcast.emit('stop typing', {
-      username: socket.username
+      name: socket.name
     });
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
 
+    users.splice(sockets[socket.id], 1);
+    sockets.splice(socket.id, 1);
+
     if (addedUser) {
       --numUsers;
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
-        username: socket.username,
-        numUsers: numUsers
+        name: socket.name,
+        numUsers: users.length
       });
     }
   });

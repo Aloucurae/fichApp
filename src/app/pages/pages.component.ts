@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket, SocketIoConfig } from 'ng-socket-io';
 
 @Component({
   selector: 'app-pages',
