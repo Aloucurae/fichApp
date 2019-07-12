@@ -10,6 +10,8 @@ import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -22,6 +24,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AngularFontAwesomeModule,
     PagesModule,
     FormsModule,
+    ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),

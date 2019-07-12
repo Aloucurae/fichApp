@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var numUsers = 0;
 var users = [];
 var sockets = [];
+var personagens = {};
 
 io.on('connection', (socket) => {
 
@@ -55,18 +56,32 @@ io.on('connection', (socket) => {
   // when the client emits 'new message', this listens and executes
   socket.on('message', (data) => {
     // we tell the client to execute 'new message'
-    socket.broadcast.emit('message', {
-      name: socket.name,
-      message: data
-    });
+
+    // somente master envia mensagem
+    if (socket.id == users['master'].id) {
+      socket.broadcast.emit('message', data);
+    }
   });
 
-  // when the client emits 'adduser', this listens and executes
+  socket.on('chengeAssets', (data) => {
+    // we tell the client to execute 'new message'
+    if (socket.id == users['master'].id) {
+      socket.broadcast.emit('chengeAssets', data);
+    }
+  });
+
+  // when the client emits 'setMaster', this listens and executes
+  socket.on('setMaster', (master) => {
+    users['master'] = socket;
+    socket.emit('usuarios', { personagens: personagens });
+  });
+
   socket.on('adduser', (perc) => {
 
     if (addedUser) return;
 
     users[perc.id] = socket;
+    personagens[perc.id] = perc;
     sockets[socket.id] = perc.id;
 
     // we store the name in the socket session for this client
@@ -77,11 +92,11 @@ io.on('connection', (socket) => {
     addedUser = true;
 
     socket.emit('login', {
-      numUsers: users.length
+      numUsers: users.length,
     });
 
     // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('userjoined', {
+    users['master'].emit('userjoined', {
       nome: socket.nome,
       numUsers: numUsers,
       perc: perc
@@ -89,19 +104,6 @@ io.on('connection', (socket) => {
 
   });
 
-  // when the client emits 'typing', we broadcast it to others
-  socket.on('typing', () => {
-    socket.broadcast.emit('typing', {
-      name: socket.name
-    });
-  });
-
-  // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', () => {
-    socket.broadcast.emit('stop typing', {
-      name: socket.name
-    });
-  });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {

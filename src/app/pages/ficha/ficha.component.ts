@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import { PercentPipe } from '@angular/common';
 
 @Component({
   selector: 'app-ficha',
@@ -8,26 +9,36 @@ import { AppService } from 'src/app/app.service';
 })
 export class FichaComponent implements OnInit {
 
-  perc = {
-    nome: ''
-    , pont: 0
-    , forc: 0
-    , habi: 0
-    , resi: 0
-    , armd: 0
-    , podf: 0
-    , vant: []
-    , dvan: []
-    , hist: ''
-  };
+  @Input() perc;
+
+  // perc = {
+  //   nome: ''
+  //   , pont: 0
+  //   , forc: 0
+  //   , habi: 0
+  //   , resi: 0
+  //   , armd: 0
+  //   , podf: 0
+  //   , vant: []
+  //   , dvan: []
+  //   , hist: ''
+  // };
+
+  assets = {
+    hpMax: 100,
+    mpMax: 100,
+    hp: 85,
+    mp: 55
+  }
 
   id;
   somapts = 0;
 
-
   constructor(private api: AppService) { }
 
   ngOnInit() {
+
+    // this.api.socket.emit();
   }
 
   loadPersonagem(id) {
@@ -97,6 +108,30 @@ export class FichaComponent implements OnInit {
     } else {
       alert('O Campo nome é obrigatório!');
     }
+
+  }
+
+  remAssets(att, val) {
+    this.assets[att] = this.assets[att] - parseInt(val);
+    if (this.assets[att] < 0) {
+      this.assets[att] = 0;
+    }
+  }
+
+  addAssets(att, val) {
+    this.assets[att] = this.assets[att] + parseInt(val);
+    if (this.assets[att] > this.assets[att + 'Max']) {
+      this.assets[att] = this.assets[att + 'Max'];
+    }
+
+    this.api.socket.emit('chengeAssets',this.assets);
+  }
+
+  setHpMax() {
+
+  }
+
+  setMpMax() {
 
   }
 

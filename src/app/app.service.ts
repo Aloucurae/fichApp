@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  constructor() { }
+  public socket: any;
 
+  constructor() { }
 
   getDomain() {
     return location.hostname.split('.')[1];
@@ -22,6 +24,17 @@ export class AppService {
 
   delLocal(cname) {
     localStorage.removeItem(cname);
+  }
+
+  setSocket(url) {
+    this.socket = io(url, { 'forceNew': true });
+    this.socket.emit('setMaster', 'soueu');
+
+    return this.socket;
+  }
+
+  getSocket() {
+    return this.socket;
   }
 
   getFichas() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-pages',
@@ -7,22 +8,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor(private socket: Socket) { }
+  constructor(private api: AppService) { }
+
+  socket: any;
 
   vagas = [];
 
   ngOnInit() {
-
-    for (let index = 0; index < 1; index++) {
-      this.addVaga();
-    }
+    this.initSocket();
   }
 
-  addVaga() {
-    this.vagas.push({});
-  }
+  initSocket() {
 
-  remVaga() {
+    this.socket = this.api.setSocket('localhost:3000');
+
+    this.socket.on('userjoined', (data) => {
+      this.vagas.push(data.perc);
+    });
+
+    this.socket.on('usuarios', (data) => {
+
+      const vagas = Object.values(data.personagens);
+
+      for (const key in vagas) {
+        if (vagas.hasOwnProperty(key)) {
+          const element = vagas[key];
+          this.vagas.push(element);
+        }
+      }
+
+    });
+
 
   }
 
