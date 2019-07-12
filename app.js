@@ -66,7 +66,12 @@ io.on('connection', (socket) => {
   socket.on('chengeAssets', (data) => {
     // we tell the client to execute 'new message'
     if (socket.id == users['master'].id) {
-      socket.broadcast.emit('chengeAssets', data);
+
+      users[perc.id] = socket;
+
+      if (users[data.id]) {
+        users[data.id].emit('chengeAssets', data.assets);
+      }
     }
   });
 
@@ -87,8 +92,6 @@ io.on('connection', (socket) => {
     // we store the name in the socket session for this client
     socket.nome = perc['nome'];
 
-    ++numUsers;
-
     addedUser = true;
 
     socket.emit('login', {
@@ -100,7 +103,6 @@ io.on('connection', (socket) => {
     if (users['master']) {
       users['master'].emit('userjoined', {
         nome: socket.nome,
-        numUsers: numUsers,
         perc: perc
       });
     }
@@ -115,7 +117,6 @@ io.on('connection', (socket) => {
     sockets.splice(socket.id, 1);
 
     if (addedUser) {
-      --numUsers;
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
