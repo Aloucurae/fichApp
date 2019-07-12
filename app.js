@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
   // when the client emits 'setMaster', this listens and executes
   socket.on('setMaster', (master) => {
     users['master'] = socket;
-    socket.emit('usuarios', { personagens: personagens });
+    socket.emit('usuarios', { personagens: personagens, ip: ip });
   });
 
   socket.on('adduser', (perc) => {
@@ -96,11 +96,14 @@ io.on('connection', (socket) => {
     });
 
     // echo globally (all clients) that a person has connected
-    users['master'].emit('userjoined', {
-      nome: socket.nome,
-      numUsers: numUsers,
-      perc: perc
-    });
+
+    if (users['master']) {
+      users['master'].emit('userjoined', {
+        nome: socket.nome,
+        numUsers: numUsers,
+        perc: perc
+      });
+    }
 
   });
 

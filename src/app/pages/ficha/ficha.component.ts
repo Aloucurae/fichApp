@@ -124,7 +124,7 @@ export class FichaComponent implements OnInit {
       this.assets[att] = this.assets[att + 'Max'];
     }
 
-    this.api.socket.emit('chengeAssets',this.assets);
+    this.api.socket.emit('chengeAssets', this.assets);
   }
 
   setHpMax() {
