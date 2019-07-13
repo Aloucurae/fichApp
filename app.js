@@ -56,7 +56,6 @@ io.on('connection', (socket) => {
   // when the client emits 'new message', this listens and executes
   socket.on('message', (data) => {
     // we tell the client to execute 'new message'
-
     // somente master envia mensagem
     if (socket.id == users['master'].id) {
       socket.broadcast.emit('message', data);
@@ -64,13 +63,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chengeAssets', (data) => {
-    // we tell the client to execute 'new message'
     if (socket.id == users['master'].id) {
-
-      users[perc.id] = socket;
-
       if (users[data.id]) {
-        users[data.id].emit('chengeAssets', data.assets);
+        users[data.id].emit('chengeAssets', data);
       }
     }
   });

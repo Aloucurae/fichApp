@@ -22,6 +22,10 @@ export class PagesComponent implements OnInit {
 
     this.socket = this.api.setSocket('localhost:3000');
 
+    this.socket.on('reconnect', (msg) => {
+      this.socket.emit('setMaster', 'soueu');
+    });
+
     this.socket.on('userjoined', (data) => {
       this.vagas.push(data.perc);
     });
@@ -42,10 +46,5 @@ export class PagesComponent implements OnInit {
 
   }
 
-  joinChat() {
-
-    this.socket.connect();
-    // this.socket.emit('set-nickname', this.nickname);
-  }
 
 }

@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "ng-socket-io": "^0.2.4",
-    "ngx-bootstrap": "^5.0.0",
+    "ngx-bootstrap": "^5.1.1",
     "ngx-socket-io": "^2.1.1",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.2",

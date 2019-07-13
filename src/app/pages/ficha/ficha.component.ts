@@ -34,11 +34,12 @@ export class FichaComponent implements OnInit {
   id;
   somapts = 0;
 
+  soket: any;
+
   constructor(private api: AppService) { }
 
   ngOnInit() {
-
-    // this.api.socket.emit();
+    this.soket = this.api.getSocket();
   }
 
   loadPersonagem(id) {
@@ -116,6 +117,12 @@ export class FichaComponent implements OnInit {
     if (this.assets[att] < 0) {
       this.assets[att] = 0;
     }
+
+    this.soket.emit('chengeAssets', {
+      id: this.perc.id
+      , assets: this.assets
+      , msg: att + ' + ' + val
+    });
   }
 
   addAssets(att, val) {
@@ -124,11 +131,14 @@ export class FichaComponent implements OnInit {
       this.assets[att] = this.assets[att + 'Max'];
     }
 
-    this.api.socket.emit('chengeAssets', { id: this.perc.id, assets: this.assets });
+    this.soket.emit('chengeAssets', {
+      id: this.perc.id
+      , assets: this.assets
+      , msg: att + ' - ' + val
+    });
   }
 
   setHpMax() {
-
   }
 
   setMpMax() {
