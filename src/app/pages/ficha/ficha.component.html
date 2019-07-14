@@ -21,7 +21,7 @@
           <button (click)="remAssets('hp',1)" class="btn btn-outline-danger " type="button">
             <i class="fa fa-minus"></i><b>1</b>
           </button>
-          <button (click)="setHpMax()" class="btn btn-outline-secondary " type="button">
+          <button (click)="openModal(template)" class="btn btn-outline-secondary " type="button">
             |
           </button>
           <button (click)="addAssets('hp',1)" class="btn btn-outline-success " type="button">
@@ -43,25 +43,25 @@
       </progressbar>
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button (click)="remAttrs('forc')" class="btn btn-outline-danger " type="button">
+          <button (click)="remAssets('mp',10)" class="btn btn-outline-danger " type="button">
             <i class="fa fa-minus"></i><b>10</b>
           </button>
-          <button (click)="remAttrs('forc')" class="btn btn-outline-danger " type="button">
+          <button (click)="remAssets('mp',5)" class="btn btn-outline-danger " type="button">
             <i class="fa fa-minus"></i><b>5</b>
           </button>
-          <button (click)="remAttrs('forc')" class="btn btn-outline-danger " type="button">
+          <button (click)="remAssets('mp',1)" class="btn btn-outline-danger " type="button">
             <i class="fa fa-minus"></i><b>1</b>
           </button>
-          <button (click)="setMpMax()" class="btn btn-outline-secondary " type="button">
+          <button (click)="openModal(template)" class="btn btn-outline-secondary " type="button">
             |
           </button>
-          <button (click)="addAttrs('forc')" class="btn btn-outline-success " type="button">
+          <button (click)="addAssets('mp',1)" class="btn btn-outline-success " type="button">
             <i class="fa fa-plus"></i><b>1</b>
           </button>
-          <button (click)="addAttrs('forc')" class="btn btn-outline-success " type="button">
+          <button (click)="addAssets('mp',5)" class="btn btn-outline-success " type="button">
             <i class="fa fa-plus"></i><b>5</b>
           </button>
-          <button (click)="addAttrs('forc')" class="btn btn-outline-success " type="button">
+          <button (click)="addAssets('mp',10)" class="btn btn-outline-success " type="button">
             <i class="fa fa-plus"></i><b>10</b>
           </button>
         </div>
@@ -71,11 +71,9 @@
     <div class="form-group ">
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary half-round-right" type="button">
+          <button class="btn btn-outline-secondary half-round-right" type="button" title="Força" >
             <b>F</b><span class="d-none">orça</span>
           </button>
-        </div>
-        <div class="input-group-append" id="button-addon4">
           <button (click)="remAttrs('forc')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
@@ -91,11 +89,9 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary half-round-right" type="button">
+          <button class="btn btn-outline-secondary half-round-right" type="button" title="Habilidade" >
             <b>H</b><span class="d-none">abilidade</span>
           </button>
-        </div>
-        <div class="input-group-append" id="button-addon4">
           <button (click)="remAttrs('habi')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
@@ -111,11 +107,9 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary half-round-right" type="button">
+          <button class="btn btn-outline-secondary half-round-right" type="button" title="Resistência">
             <b>R</b><span class="d-none">esistência</span>
           </button>
-        </div>
-        <div class="input-group-append" id="button-addon4">
           <button (click)="remAttrs('resi')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
@@ -130,11 +124,9 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary half-round-right" type="button">
+          <button class="btn btn-outline-secondary half-round-right" type="button" title="Armadura" >
             <b>A</b><span class="d-none">rmadura</span>
           </button>
-        </div>
-        <div class="input-group-append" id="button-addon4">
           <button (click)="remAttrs('armd')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
@@ -149,11 +141,9 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary half-round-right" type="button">
-            <b>P</b><span class="d-none">oder</span> <b>d</b>e <b>F</b>ogo
+          <button class="btn btn-outline-secondary half-round-right" type="button" title="poder de fogo">
+            <b>P</b><span class="d-none">oder</span> <b>d</b><span class="d-none">e</span> <b>F</b><span class="d-none">ogo</span>
           </button>
-        </div>
-        <div class="input-group-append" id="button-addon4">
           <button (click)="remAttrs('podf')" class="btn btn-outline-danger btn-round" type="button">
             <i class="fa fa-minus"></i>
           </button>
@@ -195,10 +185,54 @@
     </div>
   </form>
 
-  <!-- 
-  <button type="button" class="btn btn-success col-12" (click)="salvaPersonagem()">
-    Salvar
-  </button> 
-  -->
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{perc.nome}} </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-append" id="button-addon4">
+            <button class="btn btn-outline-secondary half-round-right" type="button">
+              <b>HP max</b>
+            </button>
+          </div>
+          <div class="input-group-append" id="button-addon4">
+            <button (click)="(assets.hpMax = assets.hpMax - 1)" class="btn btn-outline-danger btn-round" type="button">
+              <i class="fa fa-minus"></i>
+            </button>
+            <button (click)="(assets.hpMax = assets.hpMax + 1)" class="btn btn-outline-success btn-round" type="button">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <input type="number" [(ngModel)]="assets.hpMax" name="hpMax" id="hpMax" class="form-control half-round-left"
+            placeholder="0" size="4" maxlength="4">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-append" id="button-addon4">
+            <button class="btn btn-outline-secondary half-round-right" type="button">
+              <b>MP max</b>
+            </button>
+          </div>
+          <div class="input-group-append" id="button-addon4">
+            <button (click)="(assets.mpMax = assets.mpMax - 1)" class="btn btn-outline-danger btn-round" type="button">
+              <i class="fa fa-minus"></i>
+            </button>
+            <button (click)="(assets.mpMax = assets.mpMax + 1)" class="btn btn-outline-success btn-round" type="button">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <input type="number" [(ngModel)]="assets.mpMax" name="mpMax" id="mpMax" class="form-control half-round-left"
+            placeholder="0" size="4" maxlength="4">
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
 </div>

@@ -11,8 +11,8 @@ export class PagesComponent implements OnInit {
   constructor(private api: AppService) { }
 
   socket: any;
-
   vagas = [];
+  ids = [];
 
   ngOnInit() {
     this.initSocket();
@@ -27,7 +27,10 @@ export class PagesComponent implements OnInit {
     });
 
     this.socket.on('userjoined', (data) => {
-      this.vagas.push(data.perc);
+      if (!this.api.in_array(data.perc['id'], this.ids)) {
+        this.ids.push(data.perc['id']);
+        this.vagas.push(data.perc);
+      }
     });
 
     this.socket.on('usuarios', (data) => {
@@ -37,14 +40,16 @@ export class PagesComponent implements OnInit {
       for (const key in vagas) {
         if (vagas.hasOwnProperty(key)) {
           const element = vagas[key];
-          this.vagas.push(element);
+
+          if (!this.api.in_array(element['id'], this.ids)) {
+            this.ids.push(element['id']);
+            this.vagas.push(element);
+          }
+
         }
       }
 
     });
-
-
   }
-
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { PercentPipe } from '@angular/common';
+import { BsModalService } from 'ngx-bootstrap/modal/';
 
 @Component({
   selector: 'app-ficha',
@@ -29,14 +29,14 @@ export class FichaComponent implements OnInit {
     mpMax: 100,
     hp: 85,
     mp: 55
-  }
+  };
 
   id;
   somapts = 0;
-
+  modalRef: any;
   soket: any;
 
-  constructor(private api: AppService) { }
+  constructor(private api: AppService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.soket = this.api.getSocket();
@@ -50,20 +50,20 @@ export class FichaComponent implements OnInit {
     if (this.somaPontos()) {
       this.perc[attr]++;
     }
+    this.soket.emit('message', this.perc);
   }
 
   remAttrs(attr) {
-
     this.perc[attr]--;
-
     if (this.perc[attr] < 0) {
       this.perc[attr] = 0;
     }
-
     this.somaPontos();
+    this.soket.emit('message', this.perc);
   }
 
   somaPontos() {
+
     let val = this.perc.forc + this.perc.habi + this.perc.resi + this.perc.armd + this.perc.podf + 1;
 
     for (const vant of this.perc.vant) {
@@ -121,7 +121,7 @@ export class FichaComponent implements OnInit {
     this.soket.emit('chengeAssets', {
       id: this.perc.id
       , assets: this.assets
-      , msg: att + ' + ' + val
+      , msg: att + ' - ' + val
     });
   }
 
@@ -134,15 +134,12 @@ export class FichaComponent implements OnInit {
     this.soket.emit('chengeAssets', {
       id: this.perc.id
       , assets: this.assets
-      , msg: att + ' - ' + val
+      , msg: att + ' + ' + val
     });
   }
 
-  setHpMax() {
-  }
-
-  setMpMax() {
-
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

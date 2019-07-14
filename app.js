@@ -58,7 +58,9 @@ io.on('connection', (socket) => {
     // we tell the client to execute 'new message'
     // somente master envia mensagem
     if (socket.id == users['master'].id) {
-      socket.broadcast.emit('message', data);
+      if (users[data.id]) {
+        users[data.id].emit('message', data);
+      }
     }
   });
 
@@ -66,6 +68,14 @@ io.on('connection', (socket) => {
     if (socket.id == users['master'].id) {
       if (users[data.id]) {
         users[data.id].emit('chengeAssets', data);
+      }
+    }
+  });
+
+  socket.on('custom', (data) => {
+    if (socket.id == users['master'].id) {
+      if (users[data.id]) {
+        users[data.id].emit('custom', data);
       }
     }
   });
