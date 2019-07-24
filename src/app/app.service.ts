@@ -27,9 +27,8 @@ export class AppService {
   }
 
   setSocket(url) {
-    this.socket = io(url, { 'forceNew': true });
+    this.socket = io(url, { forceNew  : true });
     this.socket.emit('setMaster', 'soueu');
-
     return this.socket;
   }
 
