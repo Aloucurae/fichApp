@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppService } from 'src/app/app.service';
 import { BsModalService } from 'ngx-bootstrap/modal/';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-ficha',

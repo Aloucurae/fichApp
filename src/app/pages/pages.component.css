@@ -1,8 +1,10 @@
-.fucha {
+.ficha {
     /* border: 1px solid #000; */
-    height: 100vh;
+    height: 40vh;
     overflow-x: hidden;
     padding: 0;
     float: left;
     border-right: 1px solid #777;
 }
+
+

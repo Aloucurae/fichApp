@@ -14,7 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
-
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -30,6 +30,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FormsModule,
     BrowserAnimationsModule,
     DragDropModule,
+    ContextMenuModule.forRoot({
+      useBootstrap4: true,
+    }),
     ProgressbarModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),

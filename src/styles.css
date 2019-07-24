@@ -39,3 +39,28 @@ body {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
+
+.shadow-drag {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+.shadow-drag:active {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.ficha {
+  /* border: 1px solid #000; */
+  height: 40vh;
+  overflow-x: hidden;
+  padding: 0;
+  float: left;
+  border-right: 1px solid #777;
+}
+
+.version {
+  position: fixed;
+  color: #aeaeae;
+  bottom: 10px;
+  right: 10px;
+}

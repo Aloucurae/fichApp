@@ -1,0 +1,19 @@
+.card-img-top{
+  /* border-radius: 50%; */
+}
+.btn-round {
+  border-radius: 50% !important;
+}
+
+.half-round-right {
+  border-radius: 0 25px 25px 0 !important;
+  max-width: 150px;
+  min-width: 60px;
+  text-align: left;
+}
+
+.half-round-left {
+  border-radius: 25px 0 0 25px !important;
+}
+
+

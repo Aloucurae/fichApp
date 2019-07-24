@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
+declare var require: any;
 
+import { AppService } from '../app.service';
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.css']
 })
+
+
 export class PagesComponent implements OnInit {
 
-  constructor(private api: AppService) { }
+  version = require( '../../../package.json').version;
 
   socket: any;
   vagas = [];
   ids = [];
+
+  cardSize = 15;
+
+  constructor(private api: AppService) { }
 
   ngOnInit() {
     this.initSocket();
@@ -53,3 +60,5 @@ export class PagesComponent implements OnInit {
   }
 
 }
+
+

@@ -1,12 +1,37 @@
 <div class="container-fluid">
+
   <div class="row">
-    <div class="col-6 col-md-3 ficha" *ngFor="let perc of vagas">
+    <!-- <div class="col-6 col-md-3 ficha" *ngFor="let perc of vagas">
       <app-ficha [perc]="perc"></app-ficha>
+    </div> -->
+
+
+    <div class="shadow-drag" *ngFor="let perc of vagas" cdkDrag>
+      <app-botao [size]="cardSize" [perc]="perc"></app-botao>
+      <!-- <div class="card" style="width: 15rem; ">
+        <img class="card-img-top" [src]="perc.imag" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{perc.nome}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div> -->
+
     </div>
+
   </div>
 
-  <div class="example-box" cdkDrag>
-    Drag me around
+  {{ cardSize }}
+
+  <div class="btn btn-outline-info" style="
+      transform: rotate(90deg);
+      position: fixed;
+      top: 146px;
+      right: -111px;
+      width: 300px;
+      ">
+    <input type="range" class="custom-range" [(ngModel)]="cardSize" id="customRange1">
   </div>
 
   <!-- <div class="pmd-floating-action" role="navigation">
@@ -17,4 +42,7 @@
       <i class="fa fa-minus"></i>
     </button>
   </div> -->
+</div>
+<div class="version">
+  CREATED By <a href="http://www.alexjonas.com.br/" target="_blank">Alex.js</a> &#9400; V.{{ version }}
 </div>

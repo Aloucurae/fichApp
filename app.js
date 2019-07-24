@@ -1,9 +1,13 @@
 // Setup basic express server
 var express = require('express');
+var fs = require('fs');
 var app = express();
 var path = require('path');
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var server = require('https').createServer({
+  key: fs.readFileSync('ssl/server.key'),
+  cert: fs.readFileSync('ssl/server.csr')
+}, app);
+var io = require('socket.io')(server, { origins: '*:*' });
 var port = process.env.PORT || 3000;
 
 ip = '';
@@ -38,7 +42,7 @@ server.listen(port, () => {
 });
 
 // Routing
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist/fichApp')));
 
 // Chatroom
 
