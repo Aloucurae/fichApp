@@ -67,11 +67,11 @@ export class FichaComponent implements OnInit {
     let val = this.perc.forc + this.perc.habi + this.perc.resi + this.perc.armd + this.perc.podf + 1;
 
     for (const vant of this.perc.vant) {
-      val = val + parseInt(vant.value);
+      val = val + parseInt(vant.value, 10);
     }
 
     for (const dvan of this.perc.dvan) {
-      val = val - parseInt(dvan.value);
+      val = val - parseInt(dvan.value, 10);
     }
 
     this.somapts = this.perc.pont - val;
@@ -113,7 +113,7 @@ export class FichaComponent implements OnInit {
   }
 
   remAssets(att, val) {
-    this.assets[att] = this.assets[att] - parseInt(val);
+    this.assets[att] = this.assets[att] - parseInt(val, 10);
     if (this.assets[att] < 0) {
       this.assets[att] = 0;
     }
@@ -126,7 +126,7 @@ export class FichaComponent implements OnInit {
   }
 
   addAssets(att, val) {
-    this.assets[att] = this.assets[att] + parseInt(val);
+    this.assets[att] = this.assets[att] + parseInt(val, 10);
     if (this.assets[att] > this.assets[att + 'Max']) {
       this.assets[att] = this.assets[att + 'Max'];
     }

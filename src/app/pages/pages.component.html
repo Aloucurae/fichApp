@@ -5,9 +5,9 @@
       <app-ficha [perc]="perc"></app-ficha>
     </div> -->
 
-
     <div class="shadow-drag" *ngFor="let perc of vagas" cdkDrag>
       <app-botao [size]="cardSize" [perc]="perc"></app-botao>
+
       <!-- <div class="card" style="width: 15rem; ">
         <img class="card-img-top" [src]="perc.imag" alt="Card image cap">
         <div class="card-body">
@@ -22,26 +22,15 @@
 
   </div>
 
-  {{ cardSize }}
-
-  <div class="btn btn-outline-info" style="
-      transform: rotate(90deg);
-      position: fixed;
-      top: 146px;
-      right: -111px;
-      width: 300px;
-      ">
+  <div class="btn size-bar">
     <input type="range" class="custom-range" [(ngModel)]="cardSize" id="customRange1">
   </div>
 
-  <!-- <div class="pmd-floating-action" role="navigation">
-    <button class="btn btn-outline-success" (click)="addVaga()">
-      <i class="fa fa-plus"></i>
+  <div class="pmd-floating-action" role="navigation">
+    <button class="btn btn-outline-secondary">
+      <i class="fa fa-bars"></i>
     </button>
-    <button class="btn btn-outline-danger">
-      <i class="fa fa-minus"></i>
-    </button>
-  </div> -->
+  </div>
 </div>
 <div class="version">
   CREATED By <a href="http://www.alexjonas.com.br/" target="_blank">Alex.js</a> &#9400; V.{{ version }}

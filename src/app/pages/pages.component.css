@@ -1,10 +1,17 @@
 .ficha {
-    /* border: 1px solid #000; */
-    height: 40vh;
-    overflow-x: hidden;
-    padding: 0;
-    float: left;
-    border-right: 1px solid #777;
+  /* border: 1px solid #000; */
+  height: 40vh;
+  overflow-x: hidden;
+  padding: 0;
+  float: left;
+  border-right: 1px solid #777;
 }
 
-
+.size-bar {
+  transform: rotate(90deg);
+  position: fixed;
+  top: 45%;
+  right: -32vh;
+  /* right: -111px; */
+  width: 75vh;
+}
