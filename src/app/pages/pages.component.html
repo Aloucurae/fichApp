@@ -15,16 +15,41 @@
 
   </div>
 
+  <div class="pmd-floating-action" role="navigation">
+    <button class="btn btn-outline-secondary" [contextMenu]="basicMenu">
+      <i class="fa fa-bars"></i>
+    </button>
+  </div>
+
   <div class="btn size-bar">
     <input type="range" class="custom-range" [(ngModel)]="cardSize" id="customRange1">
   </div>
 
-  <div class="pmd-floating-action" role="navigation">
-    <button class="btn btn-outline-secondary">
-      <i class="fa fa-bars"></i>
+  <context-menu>
+    <ng-template contextMenuItem (execute)="openModal(ModalFicha)">
+      Duplicar
+    </ng-template>
+    <ng-template contextMenuItem >
+      Desconectar
+    </ng-template>
+    <ng-template contextMenuItem (execute)="setMaster()">
+      <i class="fa fa-fw fa-retweet"></i> Reload All
+    </ng-template>
+  </context-menu>
+
+</div>
+
+<ng-template #modalUsusarios>
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">{{perc.nome}} </h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
-</div>
+  <!-- <div class="modal-body">
+  </div> -->
+</ng-template>
+
 <div class="version">
   CREATED By <a href="http://www.alexjonas.com.br/" target="_blank">Alex.js</a> &#9400; V.{{ version }}
 </div>

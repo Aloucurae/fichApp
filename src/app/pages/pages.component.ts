@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ContextMenuComponent } from 'ngx-contextmenu';
+import { BsModalService } from 'ngx-bootstrap/modal';
+
 declare var require: any;
 
 import { AppService } from '../app.service';
@@ -21,17 +24,30 @@ export class PagesComponent implements OnInit {
 
   version = require('../../../package.json').version;
 
+  @ViewChild(ContextMenuComponent, { static: true }) public basicMenu: ContextMenuComponent;
+
   socket: any;
+  modalRef: any;
   vagas = [];
   enemies = [];
   ids = [];
 
   cardSize = 15;
 
-  constructor(private api: AppService) { }
+  constructor(private api: AppService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.initSocket();
+  }
+
+  setMaster() {
+    this.socket.emit('setMaster', 'soueu');
+    this.vagas = [];
+    this.ids = [];
+  }
+
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template);
   }
 
   initSocket() {
