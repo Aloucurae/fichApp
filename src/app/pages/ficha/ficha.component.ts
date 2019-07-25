@@ -10,6 +10,7 @@ import { AppService } from '../../app.service';
 export class FichaComponent implements OnInit {
 
   @Input() perc;
+  @Input() assets;
 
   // perc = {
   //   nome: ''
@@ -24,12 +25,12 @@ export class FichaComponent implements OnInit {
   //   , hist: ''
   // };
 
-  assets = {
-    hpMax: 100,
-    mpMax: 100,
-    hp: 85,
-    mp: 55
-  };
+  // assets = {
+  //   hpMax: 100,
+  //   mpMax: 100,
+  //   hp: 85,
+  //   mp: 55
+  // };
 
   id;
   somapts = 0;
@@ -50,6 +51,7 @@ export class FichaComponent implements OnInit {
     if (this.somaPontos()) {
       this.perc[attr]++;
     }
+    this.somaPontos();
     this.soket.emit('message', this.perc);
   }
 
@@ -63,15 +65,14 @@ export class FichaComponent implements OnInit {
   }
 
   somaPontos() {
-
-    let val = this.perc.forc + this.perc.habi + this.perc.resi + this.perc.armd + this.perc.podf + 1;
+    let val = this.perc.forc + this.perc.habi + this.perc.resi + this.perc.armd + this.perc.podf;
 
     for (const vant of this.perc.vant) {
-      val = val + parseInt(vant.value, 10);
+      val = val + parseInt(vant.value || 0, 10);
     }
 
     for (const dvan of this.perc.dvan) {
-      val = val - parseInt(dvan.value, 10);
+      val = val - parseInt(dvan.value || 0, 10);
     }
 
     this.somapts = this.perc.pont - val;
@@ -80,7 +81,7 @@ export class FichaComponent implements OnInit {
   }
 
   addVants(attr) {
-    this.perc[attr].push({ desc: '', value: 0 });
+    this.perc[attr].push({ desc: '', value: null });
   }
 
   remVants(attr, id) {
@@ -138,8 +139,10 @@ export class FichaComponent implements OnInit {
     });
   }
 
+  // ------- modal -----
   openModal(template: any) {
     this.modalRef = this.modalService.show(template);
   }
+  // ------- modal -----
 
 }

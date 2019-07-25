@@ -1,6 +1,11 @@
 .card-img-round {
   border-radius: 50%;
 }
+
+.card {
+  border-radius: 5px;
+}
+
 .btn-round {
   border-radius: 50% !important;
 }

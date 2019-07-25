@@ -23,6 +23,7 @@ export class PagesComponent implements OnInit {
 
   socket: any;
   vagas = [];
+  enemies = [];
   ids = [];
 
   cardSize = 15;

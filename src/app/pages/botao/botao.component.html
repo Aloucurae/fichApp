@@ -1,29 +1,21 @@
-<div class="card"  [style.width]="size+'rem'" [contextMenu]="basicMenu" [contextMenuSubject]="perc">
-
+<div class="card " [style.width]="size+'rem'" [contextMenu]="basicMenu" [contextMenuSubject]="perc">
   <img class="card-img-top" [src]="perc.imag" alt="Card image cap">
-  <div class="card-img-overlay">
-    <h5 class="card-title">{{perc.nome}}</h5>
-    <!-- style="width: 15rem;" <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-      This content is a little bit longer.</p>
-    <p class="card-text">Last updated 3 mins ago</p> -->
-    <!-- <span class="btn btn-outline-dark btn-round"><i class="fa fa-adjust"></i></span> -->
-    <!-- <span class="btn btn-outline-dark btn-round"><i class="fa fa-adjust"></i></span> -->
+  <div class="card-img-overlay text-center aling-center" style=" padding: 2%;">
+    <h5 class="card-title bg-white">{{perc.nome}}</h5>
+    <div style="position: absolute; bottom: 1em; width: 96%;">
+      <progressbar [max]="assets.hpMax" [value]="assets.hp" type="danger">
+        <span class="text-nowrap">{{assets.hp}} / {{assets.hpMax}}</span>
+      </progressbar>
+      <progressbar [max]="assets.mpMax" [value]="assets.mp">
+        <span class="text-nowrap">{{assets.mp}} / {{assets.mpMax}}</span>
+      </progressbar>
+    </div>
   </div>
-  <!-- <div class="card-body"> -->
-  <div>
-    <app-ficha *ngIf="hideFicha" [perc]="perc"></app-ficha>
-  </div>
-  <!-- <h5 class="card-title">{{perc.nome}}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-      content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a> -->
-  <!-- </div> -->
 </div>
 
 <context-menu>
-  <ng-template contextMenuItem (execute)="(hideFicha = !hideFicha)">
-    To boton
+  <ng-template contextMenuItem (execute)="openModal(ModalFicha)">
+    Ver Ficha
   </ng-template>
   <ng-template contextMenuItem divider="true"></ng-template>
   <ng-template contextMenuItem let-item (execute)="(hideFicha = !hideFicha)">
@@ -33,3 +25,15 @@
     Input something: <input type="text">
   </ng-template>
 </context-menu>
+
+<ng-template #ModalFicha>
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">{{perc.nome}} </h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-ficha [perc]="perc" [assets]="assets"></app-ficha>
+  <!-- <div class="modal-body">
+  </div> -->
+</ng-template>

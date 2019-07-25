@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ContextMenuComponent } from 'ngx-contextmenu';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-botao',
@@ -8,15 +9,28 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 })
 export class BotaoComponent implements OnInit {
 
+  @ViewChild(ContextMenuComponent, { static: true }) public basicMenu: ContextMenuComponent;
+
   @Input() perc;
-  @Input() size;
-  @ViewChild(ContextMenuComponent, { static: false }) public basicMenu: ContextMenuComponent;
+  @Input() size = 15;
+
+  assets = {
+    hpMax: 100,
+    mpMax: 100,
+    hp: 85,
+    mp: 55
+  };
 
   hideFicha = false;
+  modalRef: any;
 
-  constructor() { }
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
+  }
+
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

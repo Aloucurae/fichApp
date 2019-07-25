@@ -18,11 +18,9 @@ function ip_local() {
   var ifaces = os.networkInterfaces();
 
   Object.keys(ifaces).forEach(function (ifname) {
-    var alias = 0;
 
     ifaces[ifname].forEach(function (iface) {
       if ('IPv4' !== iface.family || iface.internal !== false) {
-        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
         return;
       }
 
@@ -37,23 +35,20 @@ function ip_local() {
 ip_local();
 
 server.listen(port, () => {
-  console.log('Server listening at port %d', port);
-  console.log(ip);
+  console.log('Server Mestre rodando');
+  console.log('Todos devem acessar');
+  console.log('https://' + ip + ':' + port);
 });
 
 // Routing
 app.use(express.static(path.join(__dirname, 'dist/fichApp')));
 
 // Chatroom
-
-var numUsers = 0;
 var users = [];
 var sockets = [];
 var personagens = {};
 
 io.on('connection', (socket) => {
-
-  console.log('nova conexao');
 
   var addedUser = false;
 
@@ -84,10 +79,13 @@ io.on('connection', (socket) => {
     }
   });
 
-  // when the client emits 'setMaster', this listens and executes
   socket.on('setMaster', (master) => {
     users['master'] = socket;
     socket.emit('usuarios', { personagens: personagens, ip: ip });
+  });
+
+  socket.on('remUser', (data) => {
+    // socket.emit('usuarios', { personagens: personagens, ip: ip });
   });
 
   socket.on('adduser', (perc) => {
@@ -97,6 +95,8 @@ io.on('connection', (socket) => {
     users[perc.id] = socket;
     personagens[perc.id] = perc;
     sockets[socket.id] = perc.id;
+
+    console.log(perc['nome'] + ' Entrou na sala ');
 
     // we store the name in the socket session for this client
     socket.nome = perc['nome'];
@@ -108,16 +108,13 @@ io.on('connection', (socket) => {
     });
 
     // echo globally (all clients) that a person has connected
-
     if (users['master']) {
       users['master'].emit('userjoined', {
         nome: socket.nome,
         perc: perc
       });
     }
-
   });
-
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
