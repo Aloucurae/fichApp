@@ -31,7 +31,7 @@
     "ngx-bootstrap": "^5.1.1",
     "ngx-contextmenu": "^5.2.0",
     "ngx-socket-io": "^2.1.1",
-    "npm": "^6.10.2",
+    "npm": "^6.13.4",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.2",
     "socket.io": "^2.2.0",
